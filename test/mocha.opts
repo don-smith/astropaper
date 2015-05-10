@@ -1,0 +1,5 @@
+--require babel/register
+--recursive
+--ui bdd
+--timeout 6000
+-R nyan
