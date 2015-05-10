@@ -2,14 +2,14 @@
 
 An application that sets your desktop wallpaper to NASA's astronomy picture of the day.
 
-This was originally built to illustrate using [Electron](https://github.com/atom/electron), [React](), and [ECMAScript 6]() together.
+This was originally built to illustrate using [Electron](https://github.com/atom/electron), [React](https://facebook.github.io/react/), and [ECMAScript 6](https://github.com/lukehoban/es6features) together.
 
-Much gratitude to [thom-nic](https://github.com/thom-nic) and his [electron-demo](https://github.com/thom-nic/electron-demo) repository that was used as the starting point for this project.
+Much gratitude to [Thom Nichols](https://github.com/thom-nic) and his [electron-demo](https://github.com/thom-nic/electron-demo) repository that was used as the starting point for this project.
 
 ## Usability Features
 
 * Right now, the app just opens (that's all)
-* Will add features here as they are implemented
+* I'll add features here as they are implemented
 
 ## Technical Features
 
