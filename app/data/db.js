@@ -1,6 +1,8 @@
+import remote from 'remote'
 import DataStore from 'nedb'
 
-var dbPath = './entries.db'
+var paths = remote.getGlobal('paths')
+var dbPath = paths.userDataPath + '/entries.db'
 
 var db = new DataStore({
   filename: dbPath,

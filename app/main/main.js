@@ -20,8 +20,7 @@ export default () => {
     mainWindow.loadUrl(`file://${INDEX_HTML}`)
     mainWindow.show()
 
-    // global.db = db
-    global.test = { thisis: 'a test' }
+    global.paths = { userDataPath: app.getPath('userData') }
 
     if (debug) mainWindow.openDevTools({detach: true})
 
