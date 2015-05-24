@@ -2,7 +2,6 @@ import React from 'react'
 import db from '../data/db'
 import today from './stores/today'
 import wallpaper from './stores/wallpaper'
-import NavBar from './components/nav-bar.jsx'
 import MainContent from './components/main-content.jsx'
 
 class MainWindow extends React.Component {
@@ -24,9 +23,6 @@ class MainWindow extends React.Component {
   render () {
     return (
       <div id='main-window'>
-        <nav>
-          <NavBar />
-        </nav>
         <div id='main-content-region'>
           <MainContent />
         </div>
