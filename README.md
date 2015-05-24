@@ -15,7 +15,6 @@ Much gratitude to [Thom Nichols](https://github.com/thom-nic) and his [electron-
 
 * ES6 support (via babel) + eslint & eslint-plugin-react
 * React/JSX (and the Flux architecture)
-* Browserify (automated with Gulp)
 * Less CSS (with Skeleton)
 * NeDB
 
