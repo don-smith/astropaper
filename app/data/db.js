@@ -1,7 +1,9 @@
 import DataStore from 'nedb'
 
+var dbPath = './entries.db'
+
 var db = new DataStore({
-  filename: './entries.db',
+  filename: dbPath,
   autoload: true
 })
 

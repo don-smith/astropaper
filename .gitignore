@@ -1,4 +1,7 @@
+dist
 node_modules
+
+*.css
+notes.md
 npm-debug.log
-.vagrant/
-dist/
+entries.db

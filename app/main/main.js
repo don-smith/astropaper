@@ -1,8 +1,8 @@
 import app from 'app'
-import BrowserWindow from 'browser-window'
 import path from 'path'
+import BrowserWindow from 'browser-window'
 
-const INDEX_HTML = path.join(process.cwd(), 'dist/index.html')
+const INDEX_HTML = path.join(process.cwd(), 'app/renderer/index.html')
 const WINDOW_OPTS = {width: 800, height: 600}
 
 export default () => {
@@ -17,9 +17,11 @@ export default () => {
 
   app.on('ready', () => {
     mainWindow = new BrowserWindow(WINDOW_OPTS)
-
     mainWindow.loadUrl(`file://${INDEX_HTML}`)
     mainWindow.show()
+
+    // global.db = db
+    global.test = { thisis: 'a test' }
 
     if (debug) mainWindow.openDevTools({detach: true})
 

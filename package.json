@@ -3,13 +3,12 @@
   "version": "0.0.1",
   "description": "Astronomy Picture of the Day Wallpaperer",
   "private": true,
-  "main": "index.js",
+  "main": "app/main/index.js",
   "scripts": {
     "start": "gulp run",
     "launch": "gulp launch",
     "test": "gulp test",
-    "lint": "gulp lint",
-    "clean": "gulp clean"
+    "lint": "gulp lint"
   },
   "repository": {
     "type": "git",
@@ -20,7 +19,6 @@
     "desktop",
     "astronomy",
     "wallpaper",
-    "atom-shell",
     "chromium",
     "electron",
     "react",
@@ -36,21 +34,18 @@
     "apod": "^0.1.0",
     "async": "^0.9.0",
     "babel-core": "^5.1.11",
-    "eslint-plugin-react": "^2.2.0",
     "lodash": "^3.7.0",
     "nedb": "^1.1.2",
     "nslog": "^2.0.0",
     "react": "^0.13.2"
   },
   "devDependencies": {
+    "atom-package-manager": "^0.167.0",
     "babel": "^5.1.11",
-    "babelify": "^6.0.2",
-    "browser-sync": "^2.6.4",
-    "browserify": "^9.0.8",
     "chai": "^2.2.0",
-    "del": "^1.1.1",
-    "electron-prebuilt": "^0.24.0",
+    "electron-prebuilt": "^0.26.0",
     "eslint": "^0.19.0",
+    "eslint-plugin-react": "^2.2.0",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.9.0",
     "gulp-less": "^3.0.3",
@@ -59,10 +54,7 @@
     "gulp-util": "^3.0.4",
     "less": "^2.5.0",
     "mocha": "^2.2.4",
-    "reactify": "^1.1.0",
-    "sinon": "^1.14.1",
     "skeleton-less": "^2.0.1",
-    "vinyl-source-stream": "^1.1.0",
     "zombie": "^4.0.10"
   }
 }
