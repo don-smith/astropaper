@@ -29,8 +29,8 @@ var saveFile = function (url, name) {
 }
 
 export default {
-  download () {
-    let date = moment().subtract(1, 'days')
+  download (dateString) {
+    let date = moment(dateString, time.format)
     let todaysDate = date.format(time.format)
     apod.apiKey = apikey
     apod(date.toDate(), function (err, data) {

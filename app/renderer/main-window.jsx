@@ -17,8 +17,9 @@ class MainWindow extends React.Component {
     //     })
     //   }
     // })
-    today.download()
-    wallpaper.setToday('wDa2hAPchssyhOUr')
+
+    // today.download('2015-5-23')
+    // wallpaper.setToday('wDa2hAPchssyhOUr')
   }
   render () {
     return (

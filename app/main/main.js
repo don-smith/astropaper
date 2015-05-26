@@ -20,7 +20,10 @@ export default () => {
     mainWindow.loadUrl(`file://${INDEX_HTML}`)
     mainWindow.show()
 
-    global.paths = { userDataPath: app.getPath('userData') }
+    global.paths = {
+      userDataPath: app.getPath('userData'),
+      wallpaperPath: app.getPath('userData') + '/wallpapers'
+    }
 
     if (debug) mainWindow.openDevTools({detach: true})
 
