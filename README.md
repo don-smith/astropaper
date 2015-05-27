@@ -1,4 +1,4 @@
-# APOD Wallpaperer
+# Astropaper: An Astronomy Wallpaperer
 
 An application that sets your desktop wallpaper to NASA's astronomy picture of the day.
 
@@ -8,8 +8,8 @@ Much gratitude to [Thom Nichols](https://github.com/thom-nic) and his [electron-
 
 ## Usability Features
 
-* Right now, the app just opens (that's all)
-* I'll add features here as they are implemented
+* Selecting an empty tile will download the photo for that day
+* Selecting a photo tile will set that image as your wallpaper
 
 ## Technical Features
 
