@@ -39,8 +39,7 @@
     "moment": "^2.10.3",
     "nedb": "^1.1.2",
     "nslog": "^2.0.0",
-    "react": "^0.13.2",
-    "resized": "^0.1.0"
+    "react": "^0.13.2"
   },
   "devDependencies": {
     "atom-package-manager": "^0.167.0",

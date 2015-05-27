@@ -14,7 +14,10 @@ class Thumbnail extends React.Component {
   }
 
   _downloadPhoto (evnt) {
-    wallpaper.download(this.props.entry.date)
+    let self = this
+    wallpaper.download(this.props.entry.date, function () {
+      self.props.ondownload()
+    })
   }
 
   _bind (...methods) {
@@ -26,10 +29,10 @@ class Thumbnail extends React.Component {
     let wallpaperPath = remote.getGlobal('paths').wallpaperPath
     if (entry._id) {
       let imagePath = 'file:///' + wallpaperPath + '/' + entry._id + '.jpg'
+      let imagePathStyle = {backgroundImage: `url("${imagePath}")`}
       return (
-        <div className='entry' onClick={this._setAsWallpaper}>
+        <div className='entry' onClick={this._setAsWallpaper} style={imagePathStyle} >
           <span className='date'>{entry.date}</span>
-          <img className='thumbnail' src={imagePath} />
         </div>
       )
     } else {

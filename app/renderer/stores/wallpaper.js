@@ -5,7 +5,6 @@ import apod from 'apod'
 import time from './time'
 import remote from 'remote'
 import moment from 'moment'
-import resized from 'resized'
 import apikey from './apikey'
 import db from '../../data/db'
 import applescript from 'applescript'
@@ -13,7 +12,8 @@ import applescript from 'applescript'
 var userDataPath = remote.getGlobal('paths').userDataPath
 var wallpaperPath = userDataPath + '/wallpapers/'
 
-var saveFile = function (url, name) {
+var saveFile = function (url, name, callback) {
+  let filename = wallpaperPath + name
   fs.exists(wallpaperPath, function (exists) {
     if (!exists) {
       fs.mkdir(wallpaperPath, function (err) {
@@ -24,15 +24,18 @@ var saveFile = function (url, name) {
       })
     }
   })
-  var file = fs.createWriteStream(wallpaperPath + name)
+  var file = fs.createWriteStream(filename)
   http.get(url, function (response) {
     response.pipe(file)
+    response.on('end', function () {
+      callback()
+    })
   })
 }
 
 export default {
 
-  fillIn (entries, callback) {
+  mergeWallpapers (entries, callback) {
     if (!entries) throw {message: 'Argument null exception'}
 
     db.find({}, function (err, docs) {
@@ -55,7 +58,7 @@ export default {
     })
   },
 
-  download (dateString) {
+  download (dateString, callback) {
     let date = moment(dateString, time.format)
     let todaysDate = date.format(time.format)
     apod.apiKey = apikey
@@ -68,8 +71,10 @@ export default {
         if (!err && !doc) {
           db.insert(data, function (err, newDoc) {
             if (err) console.error(err)
-            saveFile(newDoc.url, newDoc._id + '.jpg')
-            console.log(newDoc)
+            saveFile(newDoc.url, newDoc._id + '.jpg', function () {
+              console.log(newDoc)
+              callback()
+            })
           })
         }
       })
