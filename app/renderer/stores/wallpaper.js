@@ -63,8 +63,8 @@ export default {
     let todaysDate = date.format(time.format)
     apod.apiKey = apikey
     apod(date.toDate(), function (err, data) {
-      if (err) {
-        console.error(err)
+      if (err || data.error) {
+        console.error(err || data.error)
         return
       }
       db.findOne({date: todaysDate}, function (err, doc) {
