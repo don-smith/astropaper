@@ -2,7 +2,7 @@ import React from 'react'
 import remote from 'remote'
 import time from '../stores/time'
 import Thumbnail from './thumbnail'
-import wallpaper from '../stores/wallpaper'
+// import wallpaper from '../stores/wallpaper'
 import tiles from '../stores/tiles'
 import actions from '../actions/actions'
 import constants from '../constants/constants'
@@ -14,14 +14,12 @@ class MainContent extends React.Component {
     super()
     let self = this
     this.state = {entries: ['loading']}
-    console.log('main-content: registering for finish download')
     dispatcher.register(function (payload) {
       if (payload.actionType === constants.FINISH_DOWNLOAD) {
-        console.log('main-content: finishing download')
         self._showTiles()
       }
     })
-    this._wallpaperDownloaded = this._wallpaperDownloaded.bind(this)
+    // this._wallpaperDownloaded = this._wallpaperDownloaded.bind(this)
   }
 
   componentDidMount () {
@@ -44,17 +42,16 @@ class MainContent extends React.Component {
     this.setState({entries: entries})
   }
 
-  _wallpaperDownloaded () {
-    this.componentDidMount()
-  }
+  // _wallpaperDownloaded () {
+  //   this.componentDidMount()
+  // }
 
   render () {
-    // let self = this
     let entries = this.state.entries.map(function (entry) {
       if (!entry) return
       return <Thumbnail entry={entry} />
-      // return <Thumbnail entry={entry} ondownload={self._wallpaperDownloaded} />
     })
+
     return (
       <div className='main-content'>
         <div className='entries'>

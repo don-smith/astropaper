@@ -3,9 +3,10 @@ import dispatcher from '../dispatchers/app-dispatcher'
 
 var actions = {
 
-  setWallpaper () {
+  setWallpaper (id) {
     dispatcher.dispatch({
-      actionType: constants.SET_WALLPAPER
+      actionType: constants.SET_WALLPAPER,
+      id: id
     })
   },
 

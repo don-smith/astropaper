@@ -12,15 +12,10 @@ class Thumbnail extends React.Component {
 
   _setAsWallpaper (evnt) {
     actions.setWallpaper(this.props.entry._id)
-    // wallpaper.setWallpaper(this.props.entry._id)
   }
 
   _downloadPhoto (evnt) {
     actions.startDownload(this.props.entry.date)
-    // let self = this
-    // wallpaper.download(this.props.entry.date, function () {
-    //   self.props.ondownload()
-    // })
   }
 
   _bind (...methods) {
@@ -47,7 +42,6 @@ class Thumbnail extends React.Component {
       )
     }
   }
-
 }
 
 Thumbnail.displayName = 'Thumbnail'

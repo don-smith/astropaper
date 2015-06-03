@@ -22,6 +22,12 @@ dispatcher.register(function (payload) {
   }
 })
 
+dispatcher.register(function (payload) {
+  if (payload.actionType === constants.SET_WALLPAPER) {
+    setWallpaper(payload.id)
+  }
+})
+
 function downloadForDate (dateString) {
   let date = moment(dateString, time.format).toDate()
 
@@ -95,17 +101,14 @@ function savePhotoToDisk (wallpaper) {
   })
 }
 
-var wallpaper = {
-  setWallpaper (id) {
-    let path = remote.getGlobal('paths').userDataPath + '/wallpapers'
-    let script = `tell application "Finder" to set desktop picture to POSIX file "${path}/${id}.jpg"`
-    applescript.execString(script, function (err) {
-      if (err) {
-        console.error(err)
-        return
-      }
-    })
-  }
+function setWallpaper (id) {
+  let path = remote.getGlobal('paths').userDataPath + '/wallpapers'
+  let script = `tell application "Finder" to set desktop picture to POSIX file "${path}/${id}.jpg"`
+  console.log(`Setting wallpaper ${id}`)
+  applescript.execString(script, function (err) {
+    if (err) {
+      console.error(err)
+      return
+    }
+  })
 }
-
-export default wallpaper

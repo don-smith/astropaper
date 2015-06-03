@@ -1,4 +1,5 @@
 import React from 'react'
+import wallpaper from './stores/wallpaper'
 import MainContent from './components/main-content.jsx'
 
 class MainWindow extends React.Component {
