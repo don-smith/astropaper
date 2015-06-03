@@ -1,5 +1,4 @@
 import fs from 'fs'
-import _ from 'lodash'
 import http from 'http'
 import apod from 'apod'
 import time from './time'
@@ -8,45 +7,95 @@ import moment from 'moment'
 import apikey from './apikey'
 import db from '../../data/db'
 import applescript from 'applescript'
+import actions from '../actions/actions'
+import constants from '../constants/constants'
+import dispatcher from '../dispatchers/app-dispatcher'
 
+apod.apiKey = apikey
 var userDataPath = remote.getGlobal('paths').userDataPath
 var wallpaperPath = userDataPath + '/wallpapers/'
 
-var saveFile = function (url, name, callback) {
-  let filename = wallpaperPath + name
-  fs.exists(wallpaperPath, function (exists) {
-    if (!exists) {
-      fs.mkdir(wallpaperPath, function (err) {
-        if (err) {
-          console.error(err)
-          return
-        }
-      })
-    }
-  })
-  var file = fs.createWriteStream(filename)
-  http.get(url, function (response) {
-    response.pipe(file)
-    response.on('end', function () {
-      callback()
+dispatcher.register(function (payload) {
+  if (payload.actionType === constants.START_DOWNLOAD) {
+    console.log(`starting download for date ${payload.date}`)
+    downloadForDate(payload.date)
+  }
+})
+
+function downloadForDate (dateString) {
+  let date = moment(dateString, time.format).toDate()
+
+  getPhotoInfo(date)
+    .then(savePhotoData)
+    .then(savePhotoToDisk)
+    .then(processingSucceeded, processingFailed)
+
+  function processingSucceeded () {
+    actions.finishDownload()
+  }
+
+  function processingFailed () {
+    console.error(`Download for ${dateString} failed`)
+  }
+}
+
+function getPhotoInfo (date) {
+  return new Promise(function (resolve, reject) {
+    apod(date, function (err, data) {
+      if (err || data.error) {
+        reject(data.error)
+      } else {
+        resolve(data)
+      }
     })
   })
 }
 
-export default {
-
-  mergeWallpapers (entries, callback) {
-    if (!entries) throw {message: 'Argument null exception'}
-
-    db.find({}, function (err, docs) {
-      let filledIn = entries.map(function (entry) {
-        let existing = _.find(docs, {date: entry.date})
-        return existing ? existing : entry
-      })
-      callback(err, filledIn)
+function savePhotoData (data) {
+  return new Promise(function (resolve, reject) {
+    db.findOne({date: data.date}, function (err, doc) {
+      if (!err && !doc) {
+        db.insert(data, function (err, wallpaper) {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(wallpaper)
+          }
+        })
+      } else {
+        reject(err)
+      }
     })
-  },
+  })
+}
 
+function savePhotoToDisk (wallpaper) {
+  let filename = wallpaperPath + wallpaper._id + '.jpg'
+  return new Promise(function (resolve, reject) {
+    // Create the wallpaper path if it doesn't exist
+    fs.exists(wallpaperPath, function (exists) {
+      if (!exists) {
+        fs.mkdir(wallpaperPath, function (err) {
+          if (err) reject(err)
+        })
+      }
+    })
+
+    // Save the file
+    var file = fs.createWriteStream(filename)
+    http.get(wallpaper.url, function (response) {
+      response.pipe(file)
+      response.on('end', function () {
+        resolve()
+      })
+      response.on('error', function (err) {
+        reject(err)
+      })
+    })
+  })
+}
+
+var wallpaper = {
   setWallpaper (id) {
     let path = remote.getGlobal('paths').userDataPath + '/wallpapers'
     let script = `tell application "Finder" to set desktop picture to POSIX file "${path}/${id}.jpg"`
@@ -56,29 +105,7 @@ export default {
         return
       }
     })
-  },
-
-  download (dateString, callback) {
-    let date = moment(dateString, time.format)
-    let todaysDate = date.format(time.format)
-    apod.apiKey = apikey
-    apod(date.toDate(), function (err, data) {
-      if (err || data.error) {
-        console.error(err || data.error)
-        return
-      }
-      db.findOne({date: todaysDate}, function (err, doc) {
-        if (!err && !doc) {
-          db.insert(data, function (err, newDoc) {
-            if (err) console.error(err)
-            saveFile(newDoc.url, newDoc._id + '.jpg', function () {
-              console.log(newDoc)
-              callback()
-            })
-          })
-        }
-      })
-    })
   }
-
 }
+
+export default wallpaper

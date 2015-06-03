@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-export default {
+var time = {
 
   format: 'YYYY-M-D',
 
@@ -11,3 +11,5 @@ export default {
   }
 
 }
+
+export default time

@@ -1,0 +1,7 @@
+var constants = {
+  SET_WALLPAPER: 'SET_WALLPAPER',
+  START_DOWNLOAD: 'START_DOWNLOAD',
+  FINISH_DOWNLOAD: 'FINISH_DOWNLOAD'
+}
+
+export default constants

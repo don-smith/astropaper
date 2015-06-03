@@ -1,6 +1,7 @@
 import React from 'react'
 import remote from 'remote'
 import wallpaper from '../stores/wallpaper'
+import actions from '../actions/actions'
 
 class Thumbnail extends React.Component {
 
@@ -10,14 +11,16 @@ class Thumbnail extends React.Component {
   }
 
   _setAsWallpaper (evnt) {
-    wallpaper.setWallpaper(this.props.entry._id)
+    actions.setWallpaper(this.props.entry._id)
+    // wallpaper.setWallpaper(this.props.entry._id)
   }
 
   _downloadPhoto (evnt) {
-    let self = this
-    wallpaper.download(this.props.entry.date, function () {
-      self.props.ondownload()
-    })
+    actions.startDownload(this.props.entry.date)
+    // let self = this
+    // wallpaper.download(this.props.entry.date, function () {
+    //   self.props.ondownload()
+    // })
   }
 
   _bind (...methods) {
@@ -27,6 +30,7 @@ class Thumbnail extends React.Component {
   render () {
     let entry = this.props.entry
     let wallpaperPath = remote.getGlobal('paths').wallpaperPath
+
     if (entry._id) {
       let imagePath = 'file:///' + wallpaperPath + '/' + entry._id + '.jpg'
       let imagePathStyle = {backgroundImage: `url("${imagePath}")`}
