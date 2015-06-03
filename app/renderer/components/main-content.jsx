@@ -2,7 +2,6 @@ import React from 'react'
 import remote from 'remote'
 import time from '../stores/time'
 import Thumbnail from './thumbnail'
-// import wallpaper from '../stores/wallpaper'
 import tiles from '../stores/tiles'
 import actions from '../actions/actions'
 import constants from '../constants/constants'
@@ -19,7 +18,6 @@ class MainContent extends React.Component {
         self._showTiles()
       }
     })
-    // this._wallpaperDownloaded = this._wallpaperDownloaded.bind(this)
   }
 
   componentDidMount () {
@@ -42,10 +40,6 @@ class MainContent extends React.Component {
     this.setState({entries: entries})
   }
 
-  // _wallpaperDownloaded () {
-  //   this.componentDidMount()
-  // }
-
   render () {
     let entries = this.state.entries.map(function (entry) {
       if (!entry) return
@@ -62,7 +56,6 @@ class MainContent extends React.Component {
       </div>
     )
   }
-
 }
 
 MainContent.displayName = 'MainContent'

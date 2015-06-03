@@ -1,6 +1,5 @@
 import React from 'react'
 import remote from 'remote'
-import wallpaper from '../stores/wallpaper'
 import actions from '../actions/actions'
 
 class Thumbnail extends React.Component {
