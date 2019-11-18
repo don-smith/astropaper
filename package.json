@@ -54,7 +54,7 @@
     "gulp-mocha": "^2.0.1",
     "gulp-shell": "^0.4.1",
     "gulp-util": "^3.0.4",
-    "less": "^2.5.0",
+    "less": "^3.10.3",
     "mocha": "^2.2.4",
     "skeleton-less": "^2.0.1",
     "zombie": "^4.0.10"
