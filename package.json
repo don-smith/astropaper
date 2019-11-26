@@ -42,7 +42,7 @@
     "react": "^0.13.2"
   },
   "devDependencies": {
-    "atom-package-manager": "^0.167.0",
+    "atom-package-manager": "^2.4.4",
     "babel": "^5.1.11",
     "chai": "^2.2.0",
     "electron-prebuilt": "^0.26.1",
