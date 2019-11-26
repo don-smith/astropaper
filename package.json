@@ -45,7 +45,7 @@
     "atom-package-manager": "^0.167.0",
     "babel": "^5.1.11",
     "chai": "^2.2.0",
-    "electron-prebuilt": "^0.26.1",
+    "electron-prebuilt": "^1.4.13",
     "eslint": "^0.19.0",
     "eslint-plugin-react": "^2.2.0",
     "gulp": "^3.8.11",
