@@ -1,0 +1,11 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:extend:20180424':
+    - apod > superagent > extend:
+        patched: '2022-09-25T01:02:44.472Z'
+  'npm:mime:20170907':
+    - apod > superagent > mime:
+        patched: '2022-09-25T01:02:44.472Z'
